@@ -1,9 +1,9 @@
 <header>
   TODO LIST
 <section>
-  <div class="todos" *ngFor="let todo of getTodos()">
-    <div>{{todo.completed}}</div>
-    <div>{{todo.title}}</div>
+  <div class="todos" *ngFor="let todo of todos$ | async">
+    <div><input type="checkbox" (click)="switchTodoCompleted(todo)" [checked]="todo.completed"></div>
+    <div [class.completed]="todo.completed">{{todo.title}}</div>
     <div>{{todo.description}}</div>
   </div>
 </section>

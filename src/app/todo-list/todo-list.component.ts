@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Todo } from '../todo';
-import { CREATE_TODO } from '../actions';
+import { CREATE_TODO, SWITCH_TODO_COMPLETED } from '../actions';
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-todo-list',
@@ -10,12 +11,10 @@ import { CREATE_TODO } from '../actions';
 })
 export class TodoListComponent implements OnInit {
 
-  private todos: Todo[];
-  private openedTodo: Number;
+  private todoNextId: number = 0;
+  public todos$: Observable<Todo[]>;
 
-  constructor(private store: Store<any>) {
-
-    this.todos = new Array<Todo>();
+  constructor(private _store: Store<any>) {
 
     this.createTodo("Faire du café");
     this.createTodo("Finir cette application");
@@ -24,21 +23,17 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.store.pipe(select('appState')).subscribe(data => {
-
-      this.todos = data.todos;
-      this.openedTodo = this.openedTodo;
-    });
-  }
-
-  getTodos() {
-    
-    return this.todos;
+    this.todos$ = this._store.select(state => state.appState.todos);
   }
 
   createTodo(title: string, description: string = "", completed: boolean = false) {
 
-    this.store.dispatch({ type: CREATE_TODO, payload: { title: title, description: description, completed: completed } });
+    this._store.dispatch({ type: CREATE_TODO, payload: { id: this.todoNextId++, title: title, description: description, completed: completed } });
+  }
+
+  switchTodoCompleted(todo: Todo) {
+
+    this._store.dispatch({ type: SWITCH_TODO_COMPLETED, payload: { id: todo.id } });
   }
 
 }

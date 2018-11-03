@@ -5,3 +5,8 @@
 .todos > div {
     margin-right: 5px;
 }
+
+.completed {
+    text-decoration: line-through;
+    color: grey;
+}
