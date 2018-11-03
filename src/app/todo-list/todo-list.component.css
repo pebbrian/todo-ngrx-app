@@ -1,0 +1,7 @@
+.todos {
+    display: flex;
+}
+
+.todos > div {
+    margin-right: 5px;
+}
