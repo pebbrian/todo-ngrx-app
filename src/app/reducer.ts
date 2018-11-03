@@ -8,7 +8,10 @@ export function reducer(state: State = INITIAL_STATE, action) {
 
     switch( action.type ) {
         case CREATE_TODO:
-            return { ...state, todos: [...state.todos, action.payload] };
+            if( action.payload.title === undefined || action.payload.title === '' ) {
+                return state;
+            }
+            return { ...state, todos: [action.payload, ...state.todos] };
         case SWITCH_TODO_COMPLETED:
             for( let k = 0; k < state.todos.length; k++ ) {
                 if( state.todos[k].id === action.payload.id ) {

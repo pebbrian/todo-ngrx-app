@@ -12,13 +12,15 @@ import { Observable } from "rxjs";
 export class TodoListComponent implements OnInit {
 
   private todoNextId: number = 0;
-  public todos$: Observable<Todo[]>;
+  private todos$: Observable<Todo[]>;
+  private newTodoTitle: string;
+  private newTodoDescription: string;
 
   constructor(private _store: Store<any>) {
 
-    this.createTodo("Faire du café");
-    this.createTodo("Finir cette application");
-    this.createTodo("Prendre un peu de repos");
+    this.createTodo("Faire du café", "et le boire");
+    this.createTodo("Finir cette application", "avant lundi");
+    this.createTodo("Prendre un peu de repos", "mérité");
   }
 
   ngOnInit() {

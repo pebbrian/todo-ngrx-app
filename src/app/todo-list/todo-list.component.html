@@ -1,9 +1,13 @@
 <header>
-  TODO LIST
+  <p>TODO LIST</p>
+  <input placeholder="New task" autofocus="" [(ngModel)]="newTodoTitle" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
+  <input placeholder="Description" autofocus="" [(ngModel)]="newTodoDescription" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
+  <input type="button" value="+" (click)="createTodo(newTodoTitle, newTodoDescription)">
 <section>
   <div class="todos" *ngFor="let todo of todos$ | async">
     <div><input type="checkbox" (click)="switchTodoCompleted(todo)" [checked]="todo.completed"></div>
     <div [class.completed]="todo.completed">{{todo.title}}</div>
+    <div>|</div>
     <div>{{todo.description}}</div>
   </div>
 </section>
