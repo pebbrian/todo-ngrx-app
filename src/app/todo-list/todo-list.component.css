@@ -6,10 +6,15 @@
     margin-right: 5px;
 }
 
-.todos .todo-header {
+.todos {
     display: flex;
     color: red;
     cursor: pointer;
+}
+
+.title {
+    flex-basis: 315px;
+    flex-grow: 0;
 }
 
 .completed {

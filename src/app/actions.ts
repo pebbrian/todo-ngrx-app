@@ -5,7 +5,8 @@ export enum TodoActionTypes {
 
     CREATE_TODO = 'CREATE TODO',
     SWITCH_TODO_COMPLETED = 'SWITCH TODO COMPLETED',
-    SWITCH_TODO_OPENED = 'SWITCH TODO OPENED'
+    SWITCH_TODO_OPENED = 'SWITCH TODO OPENED',
+    DELETE_TODO = 'DELETE TODO'
 }
 
 export class CreateTodoAction implements Action {
@@ -29,4 +30,11 @@ export class SwitchTodoOpenedAction implements Action {
     constructor(public payload: number) {}
 }
 
-export type TodoActions = CreateTodoAction | SwitchTodoCompletedAction | SwitchTodoOpenedAction;
+export class DeleteTodoAction implements Action {
+
+    type = TodoActionTypes.DELETE_TODO;
+
+    constructor(public payload: number) {}
+}
+
+export type TodoActions = CreateTodoAction | SwitchTodoCompletedAction | SwitchTodoOpenedAction | DeleteTodoAction;

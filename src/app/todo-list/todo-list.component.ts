@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
-import { CreateTodoAction, SwitchTodoCompletedAction } from '../actions';
+import { CreateTodoAction, SwitchTodoCompletedAction, DeleteTodoAction } from '../actions';
 import { Observable } from 'rxjs';
 import { AppStoreModule } from '../app-store.module';
 
@@ -36,8 +36,13 @@ export class TodoListComponent implements OnInit {
     this.appStoreModule.getStore().dispatch(new CreateTodoAction({ id: this.todoNextId++, title: title, description: description, completed: completed } ));
   }
 
-  switchTodoCompleted(todo: Todo) {
+  switchTodoCompleted(todoId: number) {
 
-    this.appStoreModule.getStore().dispatch(new SwitchTodoCompletedAction(todo.id ));
+    this.appStoreModule.getStore().dispatch(new SwitchTodoCompletedAction(todoId));
+  }
+
+  deleteTodo(todoId: number) {
+    
+    this.appStoreModule.getStore().dispatch(new DeleteTodoAction(todoId))
   }
 }

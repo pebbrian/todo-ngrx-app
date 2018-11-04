@@ -8,10 +8,9 @@
 <HR>
 <section>
   <div class="todos" *ngFor="let todo of todos$ | async">
-    <div class="todo-header">
-      <div><input type="checkbox" (click)="switchTodoCompleted(todo)" [checked]="todo.completed"></div>
-      <div routerLink="/todos/{{todo.id}}" [class.completed]="todo.completed">{{todo.title}}</div>
-    </div>
+    <div><input type="checkbox" (click)="switchTodoCompleted(todo.id)" [checked]="todo.completed"></div>
+    <div class="title" routerLink="/todos/{{todo.id}}" [class.completed]="todo.completed">{{todo.title}}</div>
+    <input type="button" value="X" (click)="deleteTodo(todo.id)">
   </div>
   <HR>
   <router-outlet></router-outlet>

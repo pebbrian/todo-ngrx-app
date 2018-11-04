@@ -30,6 +30,16 @@ export function reducer(state: State = INITIAL_STATE, action: TodoActions) {
                 return state;
             }
             return { ...state, openedTodoId: action.payload }
+        case TodoActionTypes.DELETE_TODO:
+            if( action.payload === undefined || action.payload === null || typeof action.payload != 'number' ) {
+                return state;
+            }
+            for( let k = 0; k < state.todos.length; k++ ) {
+                if( state.todos[k].id === action.payload ) {
+                    state.todos.splice(k, 1);
+                }
+            }
+            return { ...state, state: state.todos }
         default:
             return state;
     }
