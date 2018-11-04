@@ -12,8 +12,6 @@ import { AppStoreModule } from '../store/app-store.module';
 export class TodoListComponent implements OnInit {
 
   private todos$: Observable<Todo[]>;
-  private newTodoTitle: string;
-  private newTodoDescription: string;
 
   constructor(private appStoreModule: AppStoreModule) {
 

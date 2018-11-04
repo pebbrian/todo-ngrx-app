@@ -1,23 +1,72 @@
-.todos {
-    display: flex;
+.todo-list {
+    background-color: white;
+    margin: auto;
+    width: 402px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.todos > div {
+header {
+    margin: 0;
+    background-color: rgb(243, 76, 94);
+    color: white; 
+}
+
+header .title {
+    padding: 5px;
+    font-size: 1.3em;
+}
+
+nav {
+    background-color: rgb(255, 116, 124);
+    padding: 5px;
+}
+
+nav button {
+    margin-left: 5px;
+    background-color: white;
+}
+
+.todo > * {
     margin-right: 5px;
 }
 
-.todos {
+.todo {
     display: flex;
-    color: red;
+    font-size: 0.85em;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.todo:hover {
     cursor: pointer;
+    background-color: lightpink;
+}
+
+.todo button {
+    margin-right: 0;
 }
 
 .title {
-    flex-basis: 315px;
+    flex-basis: 365px;
     flex-grow: 0;
+    outline: 0;
 }
 
 .completed {
     text-decoration: line-through;
     color: grey;
+}
+
+footer {
+    padding: 5px;
+    background-color: rgb(131, 131, 131);
+    font-size: 0.85em;
+    color: white;
+}
+
+.router-link-active {
+    outline: 0;
+    font-style: italic;
+    text-decoration: underline;
 }

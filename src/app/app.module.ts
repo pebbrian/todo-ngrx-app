@@ -9,6 +9,7 @@ import { reducer } from './store/store.reducer';
 import { TodoComponent } from './todo/todo.component';
 import { AppStoreModule } from './store/app-store.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppRoutingModule,
     FormsModule,
     StoreModule.forRoot({ appState: reducer }),
-    AppStoreModule
+    AppStoreModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

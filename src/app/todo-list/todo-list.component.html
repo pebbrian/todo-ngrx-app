@@ -1,18 +1,20 @@
-<header>
-  <p>TODO LIST NGRX</p>
-  <HR>
-  <input placeholder="New task" autofocus="" [(ngModel)]="newTodoTitle" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
-  <input placeholder="Description" autofocus="" [(ngModel)]="newTodoDescription" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
-  <input type="button" value="+" (click)="createTodo(newTodoTitle, newTodoDescription)">
-</header>
-<HR>
-<section>
-  <div class="todos" *ngFor="let todo of todos$ | async">
-    <div><input type="checkbox" (click)="switchTodoCompleted(todo.id)" [checked]="todo.completed"></div>
-    <div class="title" routerLink="/todos/{{todo.id}}" [class.completed]="todo.completed">{{todo.title}}</div>
-    <input type="button" value="X" (click)="deleteTodo(todo.id)">
-  </div>
-  <HR>
-  <router-outlet></router-outlet>
-</section>
-<footer></footer>
+<div class="todo-list">
+  <header>
+    <div class="title">TODO LIST NGRX</div>
+    <nav>
+      <input  matInput placeholder="New task" [(ngModel)]="newTodoTitle" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
+      <input  matInput placeholder="Description" [(ngModel)]="newTodoDescription" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
+      <button mat-mini-fab (click)="createTodo(newTodoTitle, newTodoDescription)">+</button>
+    </nav>
+  </header>
+  <section>
+    <div class="todo" *ngFor="let todo of todos$ | async">
+      <input type="checkbox" (click)="switchTodoCompleted(todo.id)" [checked]="todo.completed">
+      <div class="title" routerLink="/todos/{{todo.id}}" routerLinkActive="router-link-active" [class.completed]="todo.completed">{{todo.title}}</div>
+      <button (click)="deleteTodo(todo.id)">x</button>
+    </div>
+  </section>
+  <footer>
+    <router-outlet></router-outlet>
+  </footer>
+</div>
