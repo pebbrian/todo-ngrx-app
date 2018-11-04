@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { Todo } from './todo';
 
 export enum TodoActionTypes {
 
@@ -13,7 +12,7 @@ export class CreateTodoAction implements Action {
 
     type = TodoActionTypes.CREATE_TODO;
 
-    constructor(public payload: any) {} // TODO: found why there is an error when replacing "any" by "Todo"
+    constructor(public payload: any) {}
 }
 
 export class SwitchTodoCompletedAction implements Action {

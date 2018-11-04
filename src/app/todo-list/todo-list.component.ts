@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from '../todo';
-import { CreateTodoAction, SwitchTodoCompletedAction, DeleteTodoAction } from '../actions';
+import { Todo } from '../todo/todo.model';
+import { CreateTodoAction, SwitchTodoCompletedAction, DeleteTodoAction } from '../store/store.actions';
 import { Observable } from 'rxjs';
-import { AppStoreModule } from '../app-store.module';
+import { AppStoreModule } from '../store/app-store.module';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,10 +11,7 @@ import { AppStoreModule } from '../app-store.module';
 })
 export class TodoListComponent implements OnInit {
 
-  private todoNextId: number = 0;
   private todos$: Observable<Todo[]>;
-  private openedTodoId$: Observable<number>;
-  private openedTodoId: number;
   private newTodoTitle: string;
   private newTodoDescription: string;
 
@@ -28,12 +25,11 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
 
     this.todos$ = this.appStoreModule.getStore().select(state => state.appState.todos);
-    this.openedTodoId$ = this.appStoreModule.getStore().select(state => state.appState.openedTodoId);
   }
 
   createTodo(title: string, description: string = "", completed: boolean = false) {
 
-    this.appStoreModule.getStore().dispatch(new CreateTodoAction({ id: this.todoNextId++, title: title, description: description, completed: completed } ));
+    this.appStoreModule.getStore().dispatch(new CreateTodoAction({ title: title, description: description, completed: completed }));
   }
 
   switchTodoCompleted(todoId: number) {

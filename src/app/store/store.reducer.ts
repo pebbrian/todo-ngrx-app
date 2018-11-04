@@ -1,8 +1,8 @@
-import State from './state';
-import { Todo } from './todo';
-import { TodoActions, TodoActionTypes } from './actions';
+import State from './store.state';
+import { Todo } from '../todo/todo.model';
+import { TodoActions, TodoActionTypes } from './store.actions';
 
-const INITIAL_STATE: State = { todos: new Array<Todo>(), openedTodoId: null }
+const INITIAL_STATE: State = { todos: new Array<Todo>(), openedTodo: null, nextTodoId: 0 };
 
 export function reducer(state: State = INITIAL_STATE, action: TodoActions) {
 
@@ -11,7 +11,7 @@ export function reducer(state: State = INITIAL_STATE, action: TodoActions) {
             if( action.payload.title === undefined || action.payload.title === '' ) {
                 return state;
             }
-            return { ...state, todos: [action.payload, ...state.todos], openedTodoId: 1 };
+            return { ...state, todos: [{ ...action.payload, id: state.nextTodoId++ }, ...state.todos], nextTodoId: state.nextTodoId };
         case TodoActionTypes.SWITCH_TODO_COMPLETED:
             for( let k = 0; k < state.todos.length; k++ ) {
                 if( state.todos[k].id === action.payload ) {
@@ -29,7 +29,12 @@ export function reducer(state: State = INITIAL_STATE, action: TodoActions) {
             if( action.payload === undefined || action.payload === null || typeof action.payload != 'number' ) {
                 return state;
             }
-            return { ...state, openedTodoId: action.payload }
+            for( let k = 0; k < state.todos.length; k++ ) {
+                if( state.todos[k].id === action.payload ) {
+                    return { ...state, openedTodo: state.todos[k] }
+                }
+            }
+            return state;
         case TodoActionTypes.DELETE_TODO:
             if( action.payload === undefined || action.payload === null || typeof action.payload != 'number' ) {
                 return state;
