@@ -1,14 +1,19 @@
 <header>
-  <p>TODO LIST</p>
+  <p>TODO LIST NGRX</p>
+  <HR>
   <input placeholder="New task" autofocus="" [(ngModel)]="newTodoTitle" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
   <input placeholder="Description" autofocus="" [(ngModel)]="newTodoDescription" (keyup.enter)="createTodo(newTodoTitle, newTodoDescription)">
   <input type="button" value="+" (click)="createTodo(newTodoTitle, newTodoDescription)">
+</header>
+<HR>
 <section>
   <div class="todos" *ngFor="let todo of todos$ | async">
-    <div><input type="checkbox" (click)="switchTodoCompleted(todo)" [checked]="todo.completed"></div>
-    <div [class.completed]="todo.completed">{{todo.title}}</div>
-    <div>|</div>
-    <div>{{todo.description}}</div>
+    <div class="todo-header">
+      <div><input type="checkbox" (click)="switchTodoCompleted(todo)" [checked]="todo.completed"></div>
+      <div routerLink="/todos/{{todo.id}}" [class.completed]="todo.completed">{{todo.title}}</div>
+    </div>
   </div>
+  <HR>
+  <router-outlet></router-outlet>
 </section>
 <footer></footer>

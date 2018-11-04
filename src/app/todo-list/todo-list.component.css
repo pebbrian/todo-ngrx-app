@@ -6,6 +6,12 @@
     margin-right: 5px;
 }
 
+.todos .todo-header {
+    display: flex;
+    color: red;
+    cursor: pointer;
+}
+
 .completed {
     text-decoration: line-through;
     color: grey;
