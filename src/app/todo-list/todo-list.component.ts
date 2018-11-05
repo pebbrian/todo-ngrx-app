@@ -11,7 +11,9 @@ import { AppStoreModule } from '../store/app-store.module';
 })
 export class TodoListComponent implements OnInit {
 
-  private todos$: Observable<Todo[]>;
+  public todos$: Observable<Todo[]>;
+  public newTodoTitle: string;
+  public newTodoDescription: string;
 
   constructor(private appStoreModule: AppStoreModule) {
 
@@ -20,22 +22,22 @@ export class TodoListComponent implements OnInit {
     this.createTodo("Faire du café", "et le boire");
   }
  
-  ngOnInit() {
+  ngOnInit() : void {
 
     this.todos$ = this.appStoreModule.getStore().select(state => state.appState.todos);
   }
 
-  createTodo(title: string, description: string = "", completed: boolean = false) {
+  createTodo(title: string, description: string = "", completed: boolean = false) : void {
 
     this.appStoreModule.getStore().dispatch(new CreateTodoAction({ title: title, description: description, completed: completed }));
   }
 
-  switchTodoCompleted(todoId: number) {
+  switchTodoCompleted(todoId: number) : void {
 
     this.appStoreModule.getStore().dispatch(new SwitchTodoCompletedAction(todoId));
   }
 
-  deleteTodo(todoId: number) {
+  deleteTodo(todoId: number) : void {
     
     this.appStoreModule.getStore().dispatch(new DeleteTodoAction(todoId))
   }

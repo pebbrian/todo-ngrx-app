@@ -12,11 +12,11 @@ import { SwitchTodoOpenedAction } from '../store/store.actions';
 })
 export class TodoComponent implements OnInit {
 
-  private todo$: Observable<Todo>;
+  public todo$: Observable<Todo>;
 
   constructor(private appStoreModule: AppStoreModule, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() : void {
 
     this.todo$ = this.appStoreModule.getStore().select(state => state.appState.openedTodo);
     this.route.url.subscribe(url => { this.appStoreModule.getStore().dispatch(new SwitchTodoOpenedAction(parseInt(url[1].path))) });
